@@ -1,19 +1,16 @@
 package aut.bme.jokes.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class JokeModel {
-    @SerializedName("id")
-    @Expose
+@Entity
+public class Joke {
+
+    @PrimaryKey
     private Integer id;
 
-    @SerializedName("setup")
-    @Expose
     private String setup;
 
-    @SerializedName("punchline")
-    @Expose
     private String punchline;
 
     public Integer getId() {
