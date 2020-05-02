@@ -13,7 +13,6 @@ public class JokesApplication extends Application {
     public void onCreate() {
         super.onCreate();
         injector = DaggerJokesApplicationComponent.builder()
-                .repositoryModule(new RepositoryModule(this))
                 .networkModule(new NetworkModule(this))
                 .repositoryModule(new RepositoryModule(this))
                 .build();
