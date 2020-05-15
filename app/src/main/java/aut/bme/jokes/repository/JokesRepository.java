@@ -39,12 +39,12 @@ public class JokesRepository {
         }.execute();
     }
 
-    public List<JokeModel> getAll() throws Exception {
+    public List<Joke> getAll() throws Exception {
         try {
-            return new AsyncTask<Void, Void, List<JokeModel>>() {
+            return new AsyncTask<Void, Void, List<Joke>>() {
 
                 @Override
-                protected List<JokeModel> doInBackground(Void... voids) {
+                protected List<Joke> doInBackground(Void... voids) {
                     return jokesDatabase.daoAccess().getAllJokes();
                 }
             }.execute().get();
