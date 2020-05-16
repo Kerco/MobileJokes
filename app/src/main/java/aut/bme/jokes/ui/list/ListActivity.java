@@ -1,5 +1,6 @@
 package aut.bme.jokes.ui.list;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 
 import aut.bme.jokes.JokesApplication;
 import aut.bme.jokes.R;
+import aut.bme.jokes.model.Joke;
 import aut.bme.jokes.model.JokeModel;
 import aut.bme.jokes.model.JokesModel;
 
@@ -23,7 +25,7 @@ public class ListActivity extends AppCompatActivity implements ListScreen {
     ListPresenter presenter;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private ActivityAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     List<JokeModel> jokes = new ArrayList<JokeModel>();
@@ -45,10 +47,32 @@ public class ListActivity extends AppCompatActivity implements ListScreen {
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
 
-        SwipeController swipeController = new SwipeController();
+
+
+        SwipeController swipeController = new SwipeController(new SwipeControllerActions() {
+            @Override
+            public void onRightClicked(int position) {
+                JokeModel model = adapter.dataset.get(position);
+                Joke jokeToRemove = new Joke();
+                jokeToRemove.setId(model.getId());
+                jokeToRemove.setSetup(model.getSetup());
+                jokeToRemove.setPunchline(model.getPunchline());
+                adapter.dataset.remove(position);
+                presenter.repository.remove(jokeToRemove);
+                adapter.notifyItemRemoved(position);
+                adapter.notifyItemRangeChanged(position, adapter.getItemCount());
+            }
+        });
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
     }
 
     @Override

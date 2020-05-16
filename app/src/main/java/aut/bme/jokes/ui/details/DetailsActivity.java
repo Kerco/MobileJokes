@@ -67,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     public void saveJoke(View view) {
         presenter.saveJoke(currentJoke);
         Context context = getApplicationContext();
-        CharSequence text = "Sikeres mentés!";
+        CharSequence text = "Saved successfully!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);

@@ -13,7 +13,7 @@ import aut.bme.jokes.R;
 import aut.bme.jokes.model.JokeModel;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActivityViewHolder> {
-    private List<JokeModel> dataset;
+    public List<JokeModel> dataset;
 
     public static class ActivityViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
