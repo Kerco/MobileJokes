@@ -22,7 +22,7 @@ import aut.bme.jokes.model.JokesModel;
 
 public class ListActivity extends AppCompatActivity implements ListScreen {
     @Inject
-    ListPresenter presenter;
+    public ListPresenter presenter;
 
     private RecyclerView recyclerView;
     private ActivityAdapter adapter;

@@ -12,6 +12,10 @@ public class JokesApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initInjector();
+    }
+
+    public void initInjector(){
         injector = DaggerJokesApplicationComponent.builder()
                 .repositoryModule(new RepositoryModule(this))
                 .networkModule(new NetworkModule(this))

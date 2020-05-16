@@ -21,7 +21,7 @@ import aut.bme.jokes.ui.main.MainActivity;
 
 public class DetailsActivity extends AppCompatActivity implements DetailsScreen {
     @Inject
-    DetailsPresenter presenter;
+    public DetailsPresenter presenter;
 
     TextView setup;
     TextView punchline;
