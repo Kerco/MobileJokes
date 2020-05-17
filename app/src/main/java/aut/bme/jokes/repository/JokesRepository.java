@@ -22,12 +22,13 @@ public class JokesRepository {
 
     private JokesDatabase jokesDatabase;
 
-    public JokesRepository(){
+    @Inject
+    public JokesRepository(Context context){
         jokesDatabase = Room.databaseBuilder(context, JokesDatabase.class, "db_joke").build();
     }
 
 
-    void Save(final Joke joke){
+    public void Save(final Joke joke){
         new AsyncTask<Void, Void, Void>(){
 
             @Override
@@ -38,12 +39,12 @@ public class JokesRepository {
         }.execute();
     }
 
-    List<JokeModel> getAll() throws Exception {
+    public List<Joke> getAll() throws Exception {
         try {
-            return new AsyncTask<Void, Void, List<JokeModel>>() {
+            return new AsyncTask<Void, Void, List<Joke>>() {
 
                 @Override
-                protected List<JokeModel> doInBackground(Void... voids) {
+                protected List<Joke> doInBackground(Void... voids) {
                     return jokesDatabase.daoAccess().getAllJokes();
                 }
             }.execute().get();
@@ -55,7 +56,7 @@ public class JokesRepository {
         return new ArrayList<>();
     }
 
-    void remove(final Joke model){
+    public void remove(final Joke model){
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... voids) {
@@ -64,7 +65,5 @@ public class JokesRepository {
             }
         }.execute();
     }
-
-
 
 }

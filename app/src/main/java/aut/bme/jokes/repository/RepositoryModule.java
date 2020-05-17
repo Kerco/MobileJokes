@@ -4,6 +4,7 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
+import aut.bme.jokes.model.Joke;
 import dagger.Module;
 import dagger.Provides;
 
@@ -16,6 +17,11 @@ public class RepositoryModule {
     }
 
     @Provides
+    Context provideContext(){
+        return context;
+    }
+
+    @Provides
     @Singleton
-    public JokesRepository provideRepository() {throw new RuntimeException();}
+    public JokesRepository provideRepository() {return new JokesRepository(context);}
 }

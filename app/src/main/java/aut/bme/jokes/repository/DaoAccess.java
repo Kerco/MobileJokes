@@ -17,7 +17,7 @@ public interface DaoAccess {
     void insertJoke(Joke model);
 
     @Query("SELECT * FROM Joke")
-    List<JokeModel> getAllJokes();
+    List<Joke> getAllJokes();
 
     @Delete
     void deleteJoke(Joke model);
